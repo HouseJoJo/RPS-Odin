@@ -14,6 +14,46 @@
                 case 2: return "scissors";
             }
         }
+        
+        function singleRound(playerSelection, computerSelection){
+            computerSelection = getComputerChoice();
+            playerSelection = playerSelection.toLowerCase();
+            let message = "Lose!";
+            let condition;
+            if(computerSelection == playerSelection){
+                return "Draw!";
+            }
+            else{
+                switch(playerSelection){
+                    case "rock":{
+                        if(computerSelection == "scissors"){
+                            message = "Win!";
+                            condition = "Rock beats Scissors";
+                        }
+                        else condition = "Paper beats Rock";
+                        break;
+                    }
+                    case "paper":{
+                        if(computerSelection == "rock"){
+                            message = "Win!";
+                            condition = "Paper beats Rock";
+                        }
+                        else condition = "Scissors beats Paper";
+                        break;
+                    }
+                    case "scissors":{
+                        if(computerSelection == "paper"){
+                            message = "Win!";
+                            condition = "Scissors beats Paper";
+                        }
+                        else condition = "Rock beats Scissors";
+                        break;
+                    }
+                    default: return "invalid input";
+                }
+                return `You ${message} ${condition}`;
+            }
+        }
     </script>
 </head>
 <body style="background-color: rgb(83, 83, 83); color: white;">

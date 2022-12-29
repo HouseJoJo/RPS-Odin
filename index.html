@@ -57,12 +57,7 @@
         function game(){
             let compScore = 0;
             let userScore = 0;
-            for(let i = 0; i <= 5; i++){
-                if(compScore == 3 || userScore == 3){
-                    //win conditions and output.
-                    console.log(`User: ${userScore} Comp: ${compScore}`);
-                    break;
-                }
+            while(compScore < 3 && userScore < 3){
                 let input = prompt("Enter rock, paper, or scissors!");
                 let tempGame = singleRound(input);
                 console.log(tempGame);
@@ -72,10 +67,7 @@
                 else if(tempGame.includes("Lose")){
                     compScore++;
                 }
-                else if(tempGame.includes("invalid") || tempGame.includes("Draw")){
-                    i--;
-                }
-                console.log(`i: ${i} CS: ${compScore} US: ${userScore}`)
+                console.log(`Score: Computer: ${compScore} User: ${userScore}`);
             }
         }
     </script>

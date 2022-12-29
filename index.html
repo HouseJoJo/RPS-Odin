@@ -67,8 +67,10 @@
                 else if(tempGame.includes("Lose")){
                     compScore++;
                 }
-                console.log(`Score: Computer: ${compScore} User: ${userScore}`);
+                console.log(`Score: Computer: ${compScore} User: ${userScore} \n`);
             }
+            return (compScore == 3) ? `You Lose best of 5. Final Score: ${compScore} - ${userScore}`:
+                `You Win best of 5. Final Score: ${userScore} - ${compScore}`;
         }
     </script>
 </head>

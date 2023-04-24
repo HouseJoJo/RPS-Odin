@@ -5,77 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script>
-        function getComputerChoice(){
-            let random = parseInt((Math.random()*10)%3); //Generates random int from 0-3
-            switch(random){
-                case 0: return "rock";
-                case 1: return "paper";
-                case 2: return "scissors";
-            }
-        }
-
-        function singleRound(playerSelection, computerSelection){
-            computerSelection = getComputerChoice();
-            playerSelection = playerSelection.toLowerCase();
-            let message = "Lose!";
-            let condition;
-            if(computerSelection == playerSelection){
-                return "Draw!";
-            }
-            else{
-                switch(playerSelection){
-                    case "rock":{
-                        if(computerSelection == "scissors"){
-                            message = "Win!";
-                            condition = "Rock beats Scissors";
-                        }
-                        else condition = "Paper beats Rock";
-                        break;
-                    }
-                    case "paper":{
-                        if(computerSelection == "rock"){
-                            message = "Win!";
-                            condition = "Paper beats Rock";
-                        }
-                        else condition = "Scissors beats Paper";
-                        break;
-                    }
-                    case "scissors":{
-                        if(computerSelection == "paper"){
-                            message = "Win!";
-                            condition = "Scissors beats Paper";
-                        }
-                        else condition = "Rock beats Scissors";
-                        break;
-                    }
-                    default: return "invalid input";
-                }
-                return `You ${message} ${condition}`;
-            }
-        }
-        function game(){
-            let compScore = 0;
-            let userScore = 0;
-            while(compScore < 3 && userScore < 3){
-                let input = prompt("Enter rock, paper, or scissors!");
-                let tempGame = singleRound(input);
-                console.log(tempGame);
-                if(tempGame.includes("Win")){
-                    userScore++;
-                }
-                else if(tempGame.includes("Lose")){
-                    compScore++;
-                }
-                console.log(`Score: Computer: ${compScore} User: ${userScore} \n`);
-            }
-            return (compScore == 3) ? `You Lose best of 5. Final Score: ${compScore} - ${userScore}`:
-                `You Win best of 5. Final Score: ${userScore} - ${compScore}`;
-        }
-    </script>
+    <script src="main.js"></script>
 </head>
 <body style="background-color: rgb(83, 83, 83); color: white;">
-    <h2>Open the console to play Rock, Paper, Scissors!</h2>
-    <h3>Run "game()" for a best of 5 game against the computer.</h3>
+    <h2>Rock, Paper, Scissors!</h2>
+    <h3>Click the corresponding button to play against the computer</h3>
+    <div id="selection">
+        <button id="rock">Rock 🗿</button>
+        <button id="paper">Paper 💸</button>
+        <button id="scissors">Scissors ✂️</button>
+    </div>
 </body>
 </html>

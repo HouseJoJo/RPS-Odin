@@ -1,3 +1,11 @@
+let buttonsDiv = document.getElementById("selection");
+let rockButton = document.getElementById("rock");
+let paperButton = document.getElementById("paper");
+let scissorsButton = document.getElementById("scissors");
+let results = document.getElementById("results");
+
+buttonsDiv.addEventListener('click',singleRound);
+
 function getComputerChoice(){
     let random = parseInt((Math.random()*10)%3); //Generates random int from 0-3
     switch(random){
@@ -7,43 +15,45 @@ function getComputerChoice(){
     }
 }
 
-function singleRound(playerSelection, computerSelection){
-    computerSelection = getComputerChoice();
-    playerSelection = playerSelection.toLowerCase();
-    let message = "Lose!";
-    let condition;
-    if(computerSelection == playerSelection){
-        return "Draw!";
-    }
-    else{
-        switch(playerSelection){
-            case "rock":{
-                if(computerSelection == "scissors"){
-                    message = "Win!";
-                    condition = "Rock beats Scissors";
-                }
-                else condition = "Paper beats Rock";
-                break;
-            }
-            case "paper":{
-                if(computerSelection == "rock"){
-                    message = "Win!";
-                    condition = "Paper beats Rock";
-                }
-                else condition = "Scissors beats Paper";
-                break;
-            }
-            case "scissors":{
-                if(computerSelection == "paper"){
-                    message = "Win!";
-                    condition = "Scissors beats Paper";
-                }
-                else condition = "Rock beats Scissors";
-                break;
-            }
-            default: return "invalid input";
+function singleRound(e){
+    if(e.target.id != 'selection'){
+        let computerSelection = getComputerChoice();
+        let playerSelection = e.target.id;
+        let message = "Lose!";
+        let condition;
+        if(computerSelection == playerSelection){
+           console.log("Draw!");
         }
-        return `You ${message} ${condition}`;
+        else{
+            switch(playerSelection){
+                case "rock":{
+                    if(computerSelection == "scissors"){
+                        message = "Win!";
+                        condition = "Rock beats Scissors";
+                    }
+                    else condition = "Paper beats Rock";
+                    break;
+                }
+                case "paper":{
+                    if(computerSelection == "rock"){
+                        message = "Win!";
+                        condition = "Paper beats Rock";
+                    }
+                    else condition = "Scissors beats Paper";
+                    break;
+                }
+                case "scissors":{
+                    if(computerSelection == "paper"){
+                        message = "Win!";
+                        condition = "Scissors beats Paper";
+                    }
+                    else condition = "Rock beats Scissors";
+                    break;
+                }
+                default: return "invalid input";
+            }
+            console.log(`You ${message} ${condition}`);
+        }
     }
 }
 function game(){

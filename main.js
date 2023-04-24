@@ -17,12 +17,16 @@ function getComputerChoice(){
 
 function singleRound(e){
     if(e.target.id != 'selection'){
+        rockButton.classList = '';
+        paperButton.classList = '';
+        scissorsButton.classList = '';
         let computerSelection = getComputerChoice();
         let playerSelection = e.target.id;
         let message = "Lose!";
         let condition;
         if(computerSelection == playerSelection){
-           console.log("Draw!");
+           results.textContent = ("Draw!");
+           e.target.classList.add('draw');
         }
         else{
             switch(playerSelection){
@@ -52,7 +56,15 @@ function singleRound(e){
                 }
                 default: return "invalid input";
             }
-            console.log(`You ${message} ${condition}`);
+            if(message == "Win!"){
+                e.target.classList.add("win");
+                document.getElementById(computerSelection).classList.add("lose");
+            }
+            else{
+                e.target.classList.add('lose');
+                document.getElementById(computerSelection).classList.add('win');
+            }
+            results.textContent = (`You ${message} ${condition}`);
         }
     }
 }

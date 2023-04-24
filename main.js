@@ -2,9 +2,12 @@ let buttonsDiv = document.getElementById("selection");
 let rockButton = document.getElementById("rock");
 let paperButton = document.getElementById("paper");
 let scissorsButton = document.getElementById("scissors");
-let results = document.getElementById("results");
+let roundResults = document.getElementById("round-results");
+let gameResults = document.getElementById("game-results");
+let compScore = 0;
+let userScore = 0;
 
-buttonsDiv.addEventListener('click',singleRound);
+buttonsDiv.addEventListener('click',game);
 
 function getComputerChoice(){
     let random = parseInt((Math.random()*10)%3); //Generates random int from 0-3
@@ -25,7 +28,7 @@ function singleRound(e){
         let message = "Lose!";
         let condition;
         if(computerSelection == playerSelection){
-           results.textContent = ("Draw!");
+           roundResults.textContent = ("Draw!");
            e.target.classList.add('draw');
         }
         else{
@@ -64,25 +67,30 @@ function singleRound(e){
                 e.target.classList.add('lose');
                 document.getElementById(computerSelection).classList.add('win');
             }
-            results.textContent = (`You ${message} ${condition}`);
+            roundResults.textContent = (`You ${message} ${condition}`);
         }
     }
 }
-function game(){
-    let compScore = 0;
-    let userScore = 0;
-    while(compScore < 3 && userScore < 3){
-        let input = prompt("Enter rock, paper, or scissors!");
-        let tempGame = singleRound(input);
-        console.log(tempGame);
-        if(tempGame.includes("Win")){
-            userScore++;
-        }
-        else if(tempGame.includes("Lose")){
-            compScore++;
-        }
-        console.log(`Score: Computer: ${compScore} User: ${userScore} \n`);
+function game(e){
+    let input = e;
+    let tempGame = singleRound(input);
+    console.log(tempGame);
+    if(roundResults.textContent.includes("Win")){
+        userScore++;
     }
-    return (compScore == 3) ? `You Lose best of 5. Final Score: ${compScore} - ${userScore}`:
-        `You Win best of 5. Final Score: ${userScore} - ${compScore}`;
+    else if(roundResults.textContent.includes("Lose")){
+        compScore++;
+    }
+    gameResults.textContent = (`Score: Computer: ${compScore} User: ${userScore} \n`);
+
+    if(compScore == 3 || userScore == 3){
+        if (compScore == 3) {
+            gameResults.textContent = (`You Lose best of 5. Final Score: ${compScore} - ${userScore}`);
+        }
+        else {
+            gameResults.textContent = (`You Win best of 5. Final Score: ${userScore} - ${compScore}`);
+        }
+        compScore = 0;
+        userScore = 0;
+    }
 }
